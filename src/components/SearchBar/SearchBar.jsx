@@ -4,44 +4,46 @@ import css from "./SearchBar.module.css";
 export class SearchBar extends Component {
     state = {
         name: ""
-    }
+    };
 
     handlerSubmit = event => {
+
         event.preventDefault();
         const { name } = this.state;
         this.props.onSubmit(name);
         this.setState({ name: "" });
     }
+    
+    handleChange = event => {
 
-    handlerChange = event => {
         const { value } = event.currentTarget;
         this.setState({ name: value });
     }
-
+    
     render() {
-
         const { name } = this.state;
-
+        
         return (
-            <header>
-                <form onSubmit={this.handlerSubmit} className={css.form}>
 
+            <header>
+
+                <form className={css.form} onSubmit={this.handlerSubmit}>
                     <input
                         type="text"
                         autoComplete="off"
                         autoFocus
                         placeholder="Search images and photos"
-                        onChange={this.handlerChange}
+                        onChange={this.handleChange}
                         value={name}
                         className={css.input}
                     />
 
-                    <button type="submit" className={css.submitButton}>
+                    <button className={css.submitButton} type="submit">
                         <span>Search</span>
                     </button>
-
                 </form>
+                
             </header>
         )
-    } 
+    }
 }

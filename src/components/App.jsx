@@ -1,42 +1,28 @@
 import { Component } from "react";
-import { fetchImages } from "./Services/api";
-import { SearchBar } from "./SearchBar/SearchBar";
-import { ImageGallery } from "./ImageGallery/ImageGallery";
-import { Loader } from "./Loader/Loader";
-import { Modal } from "./Modal/Modal";
-import { Button } from "./Button/Button";
-
-// export const App = () => {
-//   return (
-//     <div
-//       style={{
-//         height: '100vh',
-//         display: 'flex',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         fontSize: 40,
-//         color: '#010101'
-//       }}d
-//     >
-//       React homework template
-//     </div>
-//   );
-// };
+import { fetchImages } from "./Services";
+import { SearchBar } from "./SearchBar";
+import { ImageGallery } from "./ImageGallery";
+import { Loader } from "./Loader";
+import { Modal } from "./Modal";
+import { Button } from "./Button";
 
 export class App extends Component {
-  state = { 
+  
+  state = {
     images: [],
     searchValue: "",
     page: 1,
     error: null,
     isLoading: false,
-    modal: ""
+    modal: "",
   }
 
-  async componentDidMount(prevState) {
+  async componentDidUpdate(prevProps, prevState) {
+
     if (this.state.searchValue !== prevState.searchValue || this.state.page !== prevState.page) {
+      
       try {
-        this.setState({ isLoading: true })
+        this.setState({ isLoading: true });
 
         const images = await fetchImages(
           this.state.searchValue,
@@ -49,69 +35,77 @@ export class App extends Component {
               ...prevState.images,
               {
                 id: image.id,
-                webFormatURL: image.webFormatURL,
+                webformatURL: image.webformatURL,
                 largeImageURL: image.largeImageURL,
-                tags: image.tags
-              }
-            ]
+                tags: image.tags,
+              },
+            ],
           }))
         })
 
       } catch (error) {
-        this.setState({ error })
+        this.setState({ error });
 
       } finally {
-        this.setState({ isLoading: false })
+        this.setState({ isLoading: false });
       }
     }
   }
 
-  searchValue = e => {
+  searchValue = e =>
+    
     this.setState({
       searchValue: e,
       page: 1,
       images: [],
-      error: null
+      error: null,
     })
-  }
 
   showImages = () => {
+
     const { images } = this.state;
     return images;
   }
 
-  loadButtonVisible = () => {
+  loadMoreButtonVisibility = () => {
+
     if (this.state.images.length < 12) return "none";
   }
 
   loadMoreButton = event => {
+
     if (event) {
       this.setState({ page: this.state.page + 1 });
     }
   }
 
-  handlerModal = imageAd => this.setState({ modal: imageAd })
+  handlerModal = imageAddress => this.setState({ modal: imageAddress });
 
-  handlerModalClose = event => this.setState({ modal: event })
+  modalClose = event => this.setState({ modal: event });
 
-  handlerModalShow = () => this.state.modal
+  handlerModalShow = () => this.state.modal;
 
   render() {
-
     const { images, isLoading, modal } = this.state;
 
     return (
+
       <div>
         <SearchBar onSubmit={this.searchValue} />
-        <ImageGallery images={images} imageAd={this.handlerModal} />
+
+        <ImageGallery images={images} imageAddress={this.handlerModal} />
+
         {isLoading && <Loader />}
-        <div style={{ display: this.loadButtonVisible() }}>
+
+        <div style={{ display: this.loadMoreButtonVisibility() }}>
           {!isLoading && <Button onClick={this.loadMoreButton} />}
         </div>
+
         {modal !== "" && (
-          <Modal imageAd={this.handlerModalShow()} onClick={this.handlerModalClose} />
+          <Modal imageAddress={this.handlerModalShow()} onClick={this.modalClose} />
         )}
       </div>
+
     )
   }
 }

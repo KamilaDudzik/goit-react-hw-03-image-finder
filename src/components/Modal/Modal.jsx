@@ -2,29 +2,29 @@ import { Component } from "react";
 import css from "./Modal.module.css";
 
 export class Modal extends Component {
-    handlerModalClose = event => {
-        if (event.key === "Escape" || event.type === "click") {
-            this.props.onClick("");
-        }
+  modalClose = event => {
+    if (event.key === "Escape" || event.type === "click") {
+      this.props.onClick("");
     }
+  };
 
-    componentDidMount() {
-        document.addEventListener("keydown", this.handlerModalClose, false)
-    }
+  componentDidMount() {
+    document.addEventListener("keydown", this.modalClose, false);
+  }
 
-    componentWillUnmount() {
-        document.removeEventListener("keydown", this.handlerModalClose, false);
-    }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.modalClose, false);
+  }
 
-    render() {
-        const { imageAd } = this.props;
+  render() {
+    const { imageAddress } = this.props;
 
-        return (
-            <div onClick={this.handlerModalClose} className={css.modal}>
-                <div>
-                    <img src={imageAd} alt="modal" className={css.modalImage} />
-                </div>
-            </div>
-        )
-    }
+    return (
+      <div className={css.modal} onClick={this.modalClose}>
+        <div>
+          <img className={css.modalImage} src={imageAddress} alt="modal" />
+        </div>
+      </div>
+    );
+  }
 }

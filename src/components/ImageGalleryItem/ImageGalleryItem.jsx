@@ -1,18 +1,20 @@
 import css from "./ImageGalleryItem.module.css";
 
+
 export const ImageGalleryItem = props => {
-    const { id, tags, imageAd, webFormatURL, largeImageURL } = props;
-    return (
-        <li
-            className={css.images}
-            key={id}
-            value={id}
-            onClick={() => {
-                imageAd(largeImageURL)
-            }}
-        >
-            <img src={webFormatURL} alt={tags} className={css.card} />
-            
-        </li>
-    )
+  
+  const { id, tags, imageAddress, webformatURL, largeImageURL } = props;
+  
+  return (
+    <li
+      className={css.image}
+      key={id}
+      value={id}
+      onClick={() => {
+        imageAddress(largeImageURL);
+      }}
+    >
+      <img src={webformatURL} alt={tags} className={css.card} />
+    </li>
+  )
 }
