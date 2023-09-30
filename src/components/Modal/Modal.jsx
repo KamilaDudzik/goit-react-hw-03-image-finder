@@ -8,11 +8,19 @@ export class Modal extends Component {
         }
     }
 
+    componentDidMount() {
+        document.addEventListener("keydown", this.handlerModalClose, false)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.handlerModalClose, false);
+    }
+
     render() {
         const { imageAd } = this.props;
 
         return (
-            <div>
+            <div onClick={this.handlerModalClose}>
                 <div>
                     <img src={imageAd} alt="modal" />
                 </div>
