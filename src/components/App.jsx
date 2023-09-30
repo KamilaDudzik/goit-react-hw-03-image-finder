@@ -65,15 +65,21 @@ export class App extends Component {
     }
   }
 
+  handlerModal = imageAd => this.setState({ modal: imageAd })
+
+  handlerModalClose = event => this.setState({ modal: event })
+
+  handlerModalShow = () => this.state.modal
+
   render() {
 
-    const { images } = this.state;
+    const { images} = this.state;
 
     return (
       <div>
         <SearchBar onSubmit={this.searchValue} />
-        <ImageGallery images={images} />
-
+        <ImageGallery images={images} imageAd={this.handlerModal} />
+        
       </div>
     )
   }
