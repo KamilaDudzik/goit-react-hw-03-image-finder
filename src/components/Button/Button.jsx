@@ -7,9 +7,10 @@ export class Button extends Component {
 
     render() {
         return (
-            <div>
+            <div className={css.centerButton}>
                 <button
                     type="button"
+                    className={css.loadMore}
                     onClick={this.handlerClick}
                 >
                     Load more

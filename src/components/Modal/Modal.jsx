@@ -20,9 +20,9 @@ export class Modal extends Component {
         const { imageAd } = this.props;
 
         return (
-            <div onClick={this.handlerModalClose}>
+            <div onClick={this.handlerModalClose} className={css.modal}>
                 <div>
-                    <img src={imageAd} alt="modal" />
+                    <img src={imageAd} alt="modal" className={css.modalImage} />
                 </div>
             </div>
         )
