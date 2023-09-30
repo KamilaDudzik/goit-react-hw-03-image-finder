@@ -1,5 +1,5 @@
+import PropTypes from "prop-types";
 import css from "./ImageGalleryItem.module.css";
-
 
 export const ImageGalleryItem = props => {
   
@@ -17,4 +17,12 @@ export const ImageGalleryItem = props => {
       <img src={webformatURL} alt={tags} className={css.card} />
     </li>
   )
+}
+
+ImageGalleryItem.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
 }

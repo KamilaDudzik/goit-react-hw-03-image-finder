@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PropTypes from "prop-types";
 import css from "./SearchBar.module.css";
 
 export class SearchBar extends Component {
@@ -14,7 +15,7 @@ export class SearchBar extends Component {
         this.setState({ name: "" });
     }
     
-    handleChange = event => {
+    handlerChange = event => {
 
         const { value } = event.currentTarget;
         this.setState({ name: value });
@@ -33,7 +34,7 @@ export class SearchBar extends Component {
                         autoComplete="off"
                         autoFocus
                         placeholder="Search images and photos"
-                        onChange={this.handleChange}
+                        onChange={this.handlerChange}
                         value={name}
                         className={css.input}
                     />
@@ -46,4 +47,10 @@ export class SearchBar extends Component {
             </header>
         )
     }
+}
+
+SearchBar.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.func.isRequired
 }
