@@ -2,7 +2,7 @@ import { Component } from "react";
 import { fetchImages } from "./Services/api";
 import { SearchBar } from "./SearchBar/SearchBar";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
-// import { Loader } from "./Loader";
+import { Loader } from "./Loader/Loader";
 import { Modal } from "./Modal/Modal";
 
 // export const App = () => {
@@ -15,7 +15,7 @@ import { Modal } from "./Modal/Modal";
 //         alignItems: 'center',
 //         fontSize: 40,
 //         color: '#010101'
-//       }}
+//       }}d
 //     >
 //       React homework template
 //     </div>
@@ -73,13 +73,13 @@ export class App extends Component {
 
   render() {
 
-    const { images} = this.state;
+    const { images, isLoading } = this.state;
 
     return (
       <div>
         <SearchBar onSubmit={this.searchValue} />
         <ImageGallery images={images} imageAd={this.handlerModal} />
-        
+        { isLoading && <Loader /> }
       </div>
     )
   }
