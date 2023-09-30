@@ -4,6 +4,7 @@ import { SearchBar } from "./SearchBar/SearchBar";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { Loader } from "./Loader/Loader";
 import { Modal } from "./Modal/Modal";
+import { Button } from "./Button/Button";
 
 // export const App = () => {
 //   return (
@@ -79,6 +80,16 @@ export class App extends Component {
     return images;
   }
 
+  loadButtonVisible = () => {
+    if (this.state.images.length < 12) return "none";
+  }
+
+  loadMoreButton = event => {
+    if (event) {
+      this.setState({ page: this.state.page + 1 });
+    }
+  }
+
   handlerModal = imageAd => this.setState({ modal: imageAd })
 
   handlerModalClose = event => this.setState({ modal: event })
@@ -94,6 +105,9 @@ export class App extends Component {
         <SearchBar onSubmit={this.searchValue} />
         <ImageGallery images={images} imageAd={this.handlerModal} />
         {isLoading && <Loader />}
+        <div style={{ display: this.loadButtonVisible() }}>
+          {!isLoading && <Button onClick={this.loadMoreButton} />}
+        </div>
         {modal !== "" && (
           <Modal imageAd={this.handlerModalShow()} onClick={this.handlerModalClose} />
         )}
