@@ -6,17 +6,33 @@ export class SearchBar extends Component {
         name: ""
     }
 
+    handlerSubmit = event => {
+        event.preventDefault();
+        const { name } = this.state;
+        this.props.onSubmit(name);
+        this.setState({ name: "" });
+    }
+
+    handlerChange = event => {
+        const { value } = event.currentTarget;
+        this.setState({ name: value });
+    }
+
     render() {
-        
+
+        const { name } = this.state;
+
         return (
             <header>
-                <form>
+                <form onSubmit={this.handlerSubmit}>
 
                     <input
                         type="text"
                         autoComplete="off"
                         autoFocus
                         placeholder="Search images and photos"
+                        onChange={this.handlerChange}
+                        value={name}
                     />
 
                     <button type="submit">
