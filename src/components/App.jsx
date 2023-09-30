@@ -32,7 +32,7 @@ export class App extends Component {
     modal: ""
   }
 
-  async componentDidMount(prevProps, prevState) {
+  async componentDidMount(prevState) {
     if (this.state.searchValue !== prevState.searchValue || this.state.page !== prevState.page) {
       try {
         this.setState({ isLoading: true })
@@ -65,6 +65,20 @@ export class App extends Component {
     }
   }
 
+  searchValue = e => {
+    this.setState({
+      searchValue: e,
+      page: 1,
+      images: [],
+      error: null
+    })
+  }
+
+  showImages = () => {
+    const { images } = this.state;
+    return images;
+  }
+
   handlerModal = imageAd => this.setState({ modal: imageAd })
 
   handlerModalClose = event => this.setState({ modal: event })
@@ -73,13 +87,16 @@ export class App extends Component {
 
   render() {
 
-    const { images, isLoading } = this.state;
+    const { images, isLoading, modal } = this.state;
 
     return (
       <div>
         <SearchBar onSubmit={this.searchValue} />
         <ImageGallery images={images} imageAd={this.handlerModal} />
-        { isLoading && <Loader /> }
+        {isLoading && <Loader />}
+        {modal !== "" && (
+          <Modal imageAd={this.handlerModalShow()} onClick={this.handlerModalClose} />
+        )}
       </div>
     )
   }
