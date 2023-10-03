@@ -15,6 +15,7 @@ export class App extends Component {
     error: null,
     isLoading: false,
     modal: "",
+    totalPages: 0
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -38,6 +39,7 @@ export class App extends Component {
                 webformatURL: image.webformatURL,
                 largeImageURL: image.largeImageURL,
                 tags: image.tags,
+                totalPages: Math.ceil(images.totalHits / 12)
               },
             ],
           }))
@@ -70,6 +72,7 @@ export class App extends Component {
   loadMoreButtonVisibility = () => {
 
     if (this.state.images.length < 12) return "none";
+
   }
 
   loadMoreButton = event => {
@@ -86,7 +89,7 @@ export class App extends Component {
   handlerModalShow = () => this.state.modal;
 
   render() {
-    const { images, isLoading, modal } = this.state;
+    const { images, isLoading, modal, page, totalPages } = this.state;
 
     return (
 
@@ -98,7 +101,9 @@ export class App extends Component {
         {isLoading && <Loader />}
 
         <div style={{ display: this.loadMoreButtonVisibility() }}>
-          {!isLoading && <Button onClick={this.loadMoreButton} />}
+          {images.length > 0 && totalPages !== page && !isLoading && (
+          <Button onClick={this.loadMore} />
+        )}
         </div>
 
         {modal !== "" && (
