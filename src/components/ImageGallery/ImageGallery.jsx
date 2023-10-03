@@ -23,9 +23,13 @@ export const ImageGallery = ({ images, imageAddress }) => {
 }
 
 ImageGallery.propTypes = {
-  id: PropTypes.string.isRequired,
-  webformatURL: PropTypes.string.isRequired,
-  largeImageURL: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
-  imageAddress: PropTypes.string.isRequired
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  imageAddress: PropTypes.func.isRequired
 }
