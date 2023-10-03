@@ -69,11 +69,11 @@ export class App extends Component {
     return images;
   }
 
-  loadMoreButtonVisibility = () => {
+  // loadMoreButtonVisibility = () => {
 
-    if (this.state.images.length < 12) return "none";
+  //   if (this.state.images.length < 12) return "none";
 
-  }
+  // }
 
   loadMoreButton = event => {
 
@@ -99,12 +99,12 @@ export class App extends Component {
         <ImageGallery images={images} imageAddress={this.handlerModal} />
 
         {isLoading && <Loader />}
-
-        <div style={{ display: this.loadMoreButtonVisibility() }}>
+{/* 
+        <div style={{ display: this.loadMoreButtonVisibility() }}> */}
           {images.length > 0 && totalPages !== page && !isLoading && (
-          <Button onClick={this.loadMore} />
+          <Button onClick={this.loadMoreButton} />
         )}
-        </div>
+        {/* </div> */}
 
         {modal !== "" && (
           <Modal imageAddress={this.handlerModalShow()} onClick={this.modalClose} />
