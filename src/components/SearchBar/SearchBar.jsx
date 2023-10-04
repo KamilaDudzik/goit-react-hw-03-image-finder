@@ -51,6 +51,6 @@ export class SearchBar extends Component {
 
 SearchBar.propTypes = {
     onSubmit: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
-    value: PropTypes.func.isRequired
+    // onChange: PropTypes.element.isRequired,
+    // value: PropTypes.element.isRequired // not used in the component
 }
