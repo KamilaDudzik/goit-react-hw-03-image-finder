@@ -4,7 +4,7 @@ import { SearchBar } from "./SearchBar";
 import { ImageGallery } from "./ImageGallery";
 import { Loader } from "./Loader";
 import { Modal } from "./Modal";
-import { Button } from "./Button";
+import { Button } from "./Button/Button";
 
 export class App extends Component {
   
