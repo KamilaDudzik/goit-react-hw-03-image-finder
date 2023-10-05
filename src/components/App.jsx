@@ -30,7 +30,7 @@ export class App extends Component {
           this.state.page
         )
 
-        images.map(image => {
+        images.hits.map(image => {
           return this.setState(prevState => ({
             images: [
               ...prevState.images,
@@ -39,12 +39,12 @@ export class App extends Component {
                 webformatURL: image.webformatURL,
                 largeImageURL: image.largeImageURL,
                 tags: image.tags,
-                totalPages: Math.ceil(images.totalHits / 12)
+                // totalPages: Math.ceil(images.totalHits / 12)
               },
             ],
+            totalPages: Math.ceil(images.totalHits / 12)
           }))
         })
-
       } catch (error) {
         this.setState({ error });
 
@@ -99,12 +99,10 @@ export class App extends Component {
         <ImageGallery images={images} imageAddress={this.handlerModal} />
 
         {isLoading && <Loader />}
-{/* 
-        <div style={{ display: this.loadMoreButtonVisibility() }}> */}
-          {images.length > 0 && totalPages !== page && !isLoading && (
+        
+        {images.length > 0 && totalPages !== page && !isLoading && (
           <Button onClick={this.loadMoreButton} />
         )}
-        {/* </div> */}
 
         {modal !== "" && (
           <Modal imageAddress={this.handlerModalShow()} onClick={this.modalClose} />

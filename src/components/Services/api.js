@@ -12,5 +12,5 @@ export const fetchImages = async (searchValue, page) => {
       per_page: 12,
     },
   })
-  return response.data.hits;
+  return response.data
 }
